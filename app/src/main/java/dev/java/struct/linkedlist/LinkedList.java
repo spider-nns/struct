@@ -4,12 +4,11 @@ package dev.java.struct.linkedlist;
  * @author spider
  * @date 2021/3/1
  */
-public class LinkedLIst {
+public class LinkedList {
     public static void main(String[] args) {
-        Node head = new Node(1);
+        ListNode head = new ListNode(1);
 //        loopLinkedList(3, 2);
 //        printLinkedList(reverseLinkedList(head), false);
-//        recursion
 //        recursion(head);
 //        loopLinkedList(3, 2);
         palindromeString();
@@ -26,7 +25,7 @@ public class LinkedLIst {
 
     //循环链表 约瑟夫环
     static void loopLinkedList(Integer sum, Integer out) {
-        Node<Integer> h = new Node<>(1);
+        ListNode<Integer> h = new ListNode<>(1);
         initSingleLinkedListWithCapacity(h, sum, true);
         while (h != h.next) {
             for (int i = 1; i < out; i++) {
@@ -39,14 +38,14 @@ public class LinkedLIst {
     }
 
     static void singleLoop(Integer sum, Integer count) {
-        Node head = new Node(1);
+        ListNode head = new ListNode(1);
         initSingleLinkedListWithCapacity(head, sum, true);
         if (count == 1) {
             System.out.println(sum);
             return;
         }
-        Node pre = null;
-        Node cur = head;
+        ListNode pre = null;
+        ListNode cur = head;
         while (cur.next != cur) {
             for (int i = 1; i < count; i++) {
                 pre = cur;
@@ -62,8 +61,8 @@ public class LinkedLIst {
     //双向链表 前驱指针 后继指针
 
 
-    static void printLinkedList(Node head, boolean loop) {
-        Node h = head;
+    static void printLinkedList(ListNode head, boolean loop) {
+        ListNode h = head;
         System.out.print("[ " + head.val + " -> ");
         if (loop) {
             while (h.next != head) {
@@ -79,12 +78,12 @@ public class LinkedLIst {
         System.out.println("]");
     }
 
-    static <T> Node initSingleLinkedListWithCapacity(Node<T> head, int capacity, boolean loop) {
-        Node tem = head;
+    public static <T> ListNode initSingleLinkedListWithCapacity(ListNode<T> head, int capacity, boolean loop) {
+        ListNode tem = head;
         for (int i = 0; i < capacity - 1; i++) {
-            Node node = new Node(i + 2);
-            tem.next = node;
-            tem = node;
+            ListNode ListNode = new ListNode(i + 2);
+            tem.next = ListNode;
+            tem = ListNode;
         }
         if (loop) {
             tem.next = head;
@@ -94,15 +93,15 @@ public class LinkedLIst {
         return head;
     }
 
-    static <T> Node initSingleLinkedListWithCapacity(Node<T> head, int capacity, boolean loop, Boolean fill) {
-        Node tem = head;
+    static <T> ListNode initSingleLinkedListWithCapacity(ListNode<T> head, int capacity, boolean loop, Boolean fill) {
+        ListNode tem = head;
         for (int i = 0; i < capacity - 1; i++) {
-            Node node = null;
+            ListNode ListNode = null;
             if (fill) {
-                node = new Node(capacity);
+                ListNode = new ListNode(capacity);
             }
-            tem.next = node;
-            tem = node;
+            tem.next = ListNode;
+            tem = ListNode;
         }
         if (loop) {
             tem.next = head;
@@ -113,11 +112,11 @@ public class LinkedLIst {
     }
 
 
-    //reverse use double node
-    static Node reverseLinkedList(Node head) {
-        Node left = null;
+    //reverse use double ListNode
+    static ListNode reverseLinkedList(ListNode head) {
+        ListNode left = null;
         while (head != null) {
-            Node right = head.next;
+            ListNode right = head.next;
             head.next = left;
             left = head;
             head = right;
@@ -128,14 +127,14 @@ public class LinkedLIst {
 
     //Palindrome string
     static Boolean palindromeString() {
-        Node head = new Node(1);
+        ListNode head = new ListNode(1);
         initSingleLinkedListWithCapacity(head, 6, false, true);
-        Node pre = null;
-        Node slow = head;
-        Node fast = head;
+        ListNode pre = null;
+        ListNode slow = head;
+        ListNode fast = head;
         while (fast != null || fast.next != null) {
             fast = fast.next.next;
-            Node cur = slow.next;
+            ListNode cur = slow.next;
             pre = slow;
             slow = cur;
         }
@@ -156,8 +155,8 @@ public class LinkedLIst {
 
 
     //传入前驱变后继
-    static void reverseLinkedListByRecursion(Node head, Node pre, Node[] arr) {
-        Node cur = pre == null ? head : pre.next;
+    static void reverseLinkedListByRecursion(ListNode head, ListNode pre, ListNode[] arr) {
+        ListNode cur = pre == null ? head : pre.next;
         if (cur.next != null) {
             reverseLinkedListByRecursion(head, cur, arr);
         } else {
@@ -166,9 +165,9 @@ public class LinkedLIst {
         cur.next = pre;
     }
 
-    static void recursion(Node head) {
-        Node[] arr;
-        arr = new Node[]{initSingleLinkedListWithCapacity(head, 5, false)};
+    static void recursion(ListNode head) {
+        ListNode[] arr;
+        arr = new ListNode[]{initSingleLinkedListWithCapacity(head, 5, false)};
         reverseLinkedListByRecursion(head, null, arr);
         printLinkedList(arr[0], false);
     }
